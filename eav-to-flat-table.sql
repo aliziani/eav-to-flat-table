@@ -16,7 +16,7 @@ CREATE TABLE ProductProperty (
     Name NVarchar(255) NOT NULL,
     [Value] NVarchar(max) NULL
     PRIMARY KEY (ID),
-	FOREIGN KEY (ProductId) REFERENCES Products(Id)
+    FOREIGN KEY (ProductId) REFERENCES Products(Id)
 );
 
 /*
@@ -64,13 +64,13 @@ INNER JOIN Products p ON pp.ProductId = p.Id
 SET @query = '	 SELECT	* 
                  FROM 
                  (
-					SELECT pp.Name, 
-						   pp.[Value], 
-						   p.Id ''ProductId'', 
-						   p.Name ''ProductName''
-					FROM ProductProperty pp
-					INNER JOIN Products p ON pp.ProductId = p.Id
-				 ) x
+			SELECT  pp.Name, 
+				pp.[Value], 
+				p.Id ''ProductId'', 
+				p.Name ''ProductName''
+			FROM ProductProperty pp
+			INNER JOIN Products p ON pp.ProductId = p.Id
+		 ) x
                  pivot 
                  (
                     max(x.[Value])
@@ -78,7 +78,7 @@ SET @query = '	 SELECT	*
                  ) p '
 
 
-EXECUTE(@query)​
+EXECUTE(@query)
 
 
 
